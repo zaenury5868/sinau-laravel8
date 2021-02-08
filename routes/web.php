@@ -16,3 +16,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/about', function () {
+    return 'jkhkjhkjh';
+});
+Route::get('/blog', 'PostController@po');
+
+// Route::get('/post/{id}', ['as' => 'post.detail', function ($id) {
+//     echo "Post $id";
+//     echo "</br>";
+//     echo "Body post in iD $id";
+// }]);
+
+Route::resource('post', 'PostController');

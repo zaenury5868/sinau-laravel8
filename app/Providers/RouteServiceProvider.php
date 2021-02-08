@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Providers;
+$namespace = 'App\Http\Controllers';
 
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -18,7 +19,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/home';
-
+    protected $namespace = 'App\Http\Controllers';
     /**
      * The controller namespace for the application.
      *
