@@ -45,7 +45,7 @@ Route::get('/read', function () {
     return var_dump($query);
 });
 
-Route::any('/update', function () {
+Route::get('/update', function () {
     // $updated = DB::update('update posts set title = "Update field title" where id = ?', ['1']);
     $data = [
         'title' => 'isian title',
@@ -66,7 +66,30 @@ Route::get('/delete', function () {
     return $posts;
  });
 
- Route::any('/find', function () {
+ Route::get('/find', function () {
      $post = Post::find(5);
      return $post;
+ });
+
+ Route::get('/findwhere', function () {
+     $post = Post::where('user_id', 2)->orderBy('id', 'desc')->take(1)->get();
+     return $post;
+ });
+
+ Route::get('/create', function () {
+     $post = new Post();
+     $post->title = 'isi judul postingan';
+     $post->body = 'isi body dari postingan';
+     $post->user_id = 3;
+
+     $post->save();
+ });
+
+ Route::get('/createpost', function () {
+    $post = Post::create([
+        'title' => 'Create data dari method create',
+        'body' => 'salam dari cilacap',
+        'user_id' => 7
+        ]);
+        echo "data berhasil ditambahkan";
  });
