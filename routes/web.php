@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
+use PhpParser\Node\Expr\AssignOp\Pow;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -93,3 +95,49 @@ Route::get('/delete', function () {
         ]);
         echo "data berhasil ditambahkan";
  });
+
+ Route::get('/updatepost', function () {
+    //  $post = Post::where('id', 5);
+     $post = Post::find(5);
+     $post->update([
+        'title' => 'Create data dari method create',
+        'body' => 'salam dari cilacap',
+        'user_id' => 4
+    ]);
+    echo "data berhasil diubah";
+ });
+
+ Route::get('/deletepost', function () {
+    //  $post = Post::find(4);
+    //  $post->delete();
+     echo "data berhasil dihapus";
+
+    // Post::destroy([6, 7]);
+    $post = Post::where('user_id', 2);
+    $post->delete();
+ });
+
+ Route::get('/softdelete', function () {
+     Post::destroy(8, 9, 10);
+ });
+
+ Route::get('/trash', function () {
+    //  $post = Post::withTrashed()->get();
+    $post = Post::onlyTrashed()->get();
+     return $post;
+ });
+
+ Route::get('/restore', function () {
+     $post = Post::onlyTrashed()->restore();
+     return $post;
+ });
+
+ Route::get('/forcedelete', function () {
+    // $post = Post::onlyTrashed()->where('id', 10)->forceDelete();
+    // $post = Post::onlyTrashed()->forceDelete();
+    $post = Post::find(12)->forceDelete();
+    dd($post);
+ });
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
