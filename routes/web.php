@@ -39,8 +39,24 @@ Route::get('/insert', function () {
     echo "Data berhasil ditambahkan";
 });
 
-Route::get('read', function () {
+Route::get('/read', function () {
     // $query = DB::select('select * from posts where id = ?', [1]);
     $query = DB::table('posts')->where('id', 1)->first();
     return var_dump($query);
+});
+
+Route::any('/update', function () {
+    // $updated = DB::update('update posts set title = "Update field title" where id = ?', ['1']);
+    $data = [
+        'title' => 'isian title',
+        'body' => 'isian body baru'
+    ];
+    $updated = DB::table('posts')->where('id', 1)->update($data);
+    return $updated;
+});
+
+Route::get('/delete', function () {
+    // $delete = DB::delete('delete from posts where id = ?', [1]);
+    $delete = DB::table('posts')->where('id', 2)->delete();
+    return $delete;
 });
