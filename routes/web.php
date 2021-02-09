@@ -38,3 +38,9 @@ Route::get('/insert', function () {
     DB::table('posts')->insert($data);
     echo "Data berhasil ditambahkan";
 });
+
+Route::get('read', function () {
+    // $query = DB::select('select * from posts where id = ?', [1]);
+    $query = DB::table('posts')->where('id', 1)->first();
+    return var_dump($query);
+});
