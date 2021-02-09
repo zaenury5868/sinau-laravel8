@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Models\Post;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -60,3 +60,13 @@ Route::get('/delete', function () {
     $delete = DB::table('posts')->where('id', 2)->delete();
     return $delete;
 });
+
+ Route::get('/posts', function () {
+    $posts = Post::all();
+    return $posts;
+ });
+
+ Route::any('/find', function () {
+     $post = Post::find(5);
+     return $post;
+ });
