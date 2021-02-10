@@ -16,7 +16,7 @@ use PhpParser\Node\Expr\AssignOp\Pow;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/about');
 });
 Route::get('/about', function () {
     return 'jkhkjhkjh';
@@ -82,7 +82,7 @@ Route::get('/delete', function () {
      $post = new Post();
      $post->title = 'isi judul postingan';
      $post->body = 'isi body dari postingan';
-     $post->user_id = 3;
+     $post->user_id = Auth::user()->id;
 
      $post->save();
  });
@@ -91,7 +91,7 @@ Route::get('/delete', function () {
     $post = Post::create([
         'title' => 'Create data dari method create',
         'body' => 'salam dari cilacap',
-        'user_id' => 7
+        'user_id' => Auth::user()->id
         ]);
         echo "data berhasil ditambahkan";
  });
@@ -141,3 +141,4 @@ Route::get('/delete', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/user', 'HomeController@user');
